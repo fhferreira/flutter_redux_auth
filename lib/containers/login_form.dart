@@ -36,6 +36,7 @@ class LoginFormState extends State<LoginForm> {
   }
 
   Widget _showEmailInput() {
+    _emailController.text = 'flaviometalvale@gmail.com';
     return Padding(
       padding: EdgeInsets.fromLTRB(0.0, 100.0, 0.0, 0.0),
       child: TextFormField(
@@ -49,12 +50,14 @@ class LoginFormState extends State<LoginForm> {
               color: Colors.grey,
             )),
         validator: (String value) => value.isEmpty ? 'Email can\'t be empty' : null,
-        controller: _emailController
+        controller: _emailController,
+
       ),
     );
   }
 
   Widget _showPasswordInput() {
+    _passwordController.text = '123456';
     return Padding(
       padding: EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 0.0),
       child: TextFormField(

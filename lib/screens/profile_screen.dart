@@ -4,6 +4,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 
 import '../containers/logout_button.dart';
+import '../containers/me_button.dart';
 import '../models/app_state.dart';
 import '../screens/login_screen.dart';
 
@@ -15,7 +16,26 @@ class ProfileScreen extends StatelessWidget {
       converter: (Store<AppState> store) => _ViewModel.fromStore(store),
       builder: (BuildContext context, _ViewModel viewModel) {
         if (viewModel.isAuthenticated) {
-          return Center(child: LogoutButton());
+          return ListView(
+              children: <Widget>[
+                LogoutButton(),
+                MeButton(),
+
+                viewModel.picture != null ? Card(
+                  semanticContainer: true,
+                  clipBehavior: Clip.antiAliasWithSaveLayer,
+                  child: Image.network(
+                    viewModel.picture,
+                    fit: BoxFit.fill,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  elevation: 6,
+                  margin: EdgeInsets.all(10),
+                ) : null
+              ]
+          );
         } else {
           return LoginScreen();
         }
@@ -26,14 +46,17 @@ class ProfileScreen extends StatelessWidget {
 
 class _ViewModel {
   final bool isAuthenticated;
+  final String picture;
 
   _ViewModel({
     @required this.isAuthenticated,
+    this.picture,
   });
 
   static _ViewModel fromStore(Store<AppState> store) {
     return _ViewModel(
       isAuthenticated: store.state.authState.isAuthenticated,
+      picture: store.state.authState.user.picture,
     );
   }
 }

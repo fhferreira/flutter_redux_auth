@@ -15,7 +15,7 @@ class App extends StatelessWidget {
     return StoreProvider<AppState>(
       store: store,
       child: MaterialApp(
-        title: 'Oust!',
+        title: 'Hadouken!',
         routes: <String, WidgetBuilder>{
           '/': (BuildContext context) => MainScreen()
         }

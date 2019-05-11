@@ -10,6 +10,7 @@ Reducer<AuthState> authReducer = combineReducers([
   TypedReducer<AuthState, UserLoaded>(_userLoaded),
   TypedReducer<AuthState, UserLoginFailure>(_userLoginRequestFailure),
   TypedReducer<AuthState, UserLogout>(_userLogoutReducer),
+  TypedReducer<AuthState, UserMeLoaded>(_userMeReducer),
 ]);
 
 AuthState _userLoginRequestReducer(AuthState state, UserLoginRequest action) {
@@ -25,6 +26,14 @@ AuthState _userLoginRequestSuccess(AuthState state, UserLoginSuccess action) {
 }
 
 AuthState _userLoaded(AuthState state, UserLoaded action) {
+  return state.copyWith(
+    isLoading: false,
+    isAuthenticated: true,
+    user: action.user,
+  );
+}
+
+AuthState _userMeReducer(AuthState state, UserMeLoaded action) {
   return state.copyWith(
     isLoading: false,
     isAuthenticated: true,

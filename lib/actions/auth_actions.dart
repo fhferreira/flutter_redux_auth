@@ -27,4 +27,18 @@ class UserLoginFailure {
   UserLoginFailure({this.error});
 }
 
+class UserError {
+  final dynamic error;
+
+  UserError({this.error});
+}
+
 class UserLogout {}
+
+class UserMe {}
+
+class UserMeLoaded {
+  final User user;
+
+  UserMeLoaded({this.user});
+}
