@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../screens/dummy_screen_1.dart';
+import '../screens/profile_screen.dart';
 
 @immutable
 class NavState {
@@ -14,8 +14,8 @@ class NavState {
 
   factory NavState.initial() {
     return NavState(
-      selectedBottomNav: 0,
-      rootScreen: DummyScreen1(),
+      selectedBottomNav: 2,
+      rootScreen: ProfileScreen(),
     );
   }
 

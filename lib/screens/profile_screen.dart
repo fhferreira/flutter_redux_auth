@@ -16,6 +16,12 @@ class ProfileScreen extends StatelessWidget {
       converter: (Store<AppState> store) => _ViewModel.fromStore(store),
       builder: (BuildContext context, _ViewModel viewModel) {
         if (viewModel.isAuthenticated) {
+          print('viewModel');
+          print(viewModel);
+          print('picture');
+
+          print(viewModel.picture);
+
           return ListView(
               children: <Widget>[
                 LogoutButton(),
@@ -33,7 +39,7 @@ class ProfileScreen extends StatelessWidget {
                   ),
                   elevation: 6,
                   margin: EdgeInsets.all(10),
-                ) : null
+                ) : Divider()
               ]
           );
         } else {
@@ -56,7 +62,7 @@ class _ViewModel {
   static _ViewModel fromStore(Store<AppState> store) {
     return _ViewModel(
       isAuthenticated: store.state.authState.isAuthenticated,
-      picture: store.state.authState.user.picture,
+      picture: store.state.authState.user != null ? store.state.authState.user.picture : null,
     );
   }
 }
